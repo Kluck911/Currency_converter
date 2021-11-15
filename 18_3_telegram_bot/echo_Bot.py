@@ -16,8 +16,18 @@ bot = telebot.TeleBot(TOKEN)
 
 
 @bot.message_handler(commands=['start', 'help'])
-def send_welcome(message):
-    bot.send_message(message.chat.id, f"Welcome, \ c{message.chat.username}")
+def send_welcome(message: telebot.types.Message):
+    bot.send_message(message.chat.id, f"Welcome, \n{message.chat.username}")
+
+
+@bot.message_handler(content_types=['voice', ])
+def repeat(message: telebot.types.Message):
+    bot.send_message(message.chat.id, "У тебя очень красивый голос")
+
+
+@bot.message_handler(content_types=['photo', ])
+def photo_mem(message):
+    bot.reply_to(message, f'Nice meme XDD\n{message.chat.username}')
 
 
 bot.polling(none_stop=True)
