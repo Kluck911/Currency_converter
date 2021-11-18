@@ -8,8 +8,8 @@ bot = telebot.TeleBot(TOKEN)
 @bot.message_handler(commands=['start', 'help'])
 def help(message: telebot.types.Message):
     text = 'Введите тип конвертируемой валюты в следующем виде:\n<имя валюты> \
-<в какую валюту перевести> \
-<количество переводимой валюты>\n Для того чтобы просмотреть список доступных валют \
+ <в какую валюту перевести> \
+ <количество переводимой валюты>.\nВсе значения вводите через пробел.\nДля того чтобы просмотреть список доступных валют \
 используйте комманду /values'
     bot.reply_to(message, text)
 
@@ -23,7 +23,7 @@ def values(message: telebot.types.Message):
 
 
 @bot.message_handler(content_types=['text', ])
-def convert(message: telebot.types.Message):
+def get_price(message: telebot.types.Message):
     try:
         values_ = message.text.split(' ')
 
@@ -31,13 +31,13 @@ def convert(message: telebot.types.Message):
             raise ConvertionExeption('Неверное количество параметров')
 
         quote, base, amount = values_
-        total_base = CryptoConverter.convert(quote, base, amount)
+        total_base = CryptoConverter.get_price(quote, base, amount)
     except ConvertionExeption as e:
         bot.reply_to(message, f'Ошибка пользователя.\n{e}')
     except Exception as e:
         bot.reply_to(message, f'Не удалось обработать команду\n{e}')
     else:
-        text = f'Цена {amount} {quote} в {base} - {float(total_base) * float(amount)}'
+        text = f'Цена {amount} {quote} в {base} - {total_base}'
         bot.send_message(message.chat.id, text)
 
 

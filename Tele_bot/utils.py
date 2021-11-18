@@ -9,16 +9,16 @@ class ConvertionExeption(Exception):
 
 class CryptoConverter:
     @staticmethod
-    def convert(quote: str, base: str, amount: str):
+    def get_price(quote: str, base: str, amount: str):
         if quote == base:
             raise ConvertionExeption(f'Невозможно выполнить перевод одинаковых валют - {base}.')
 
         if quote not in keys.keys():
-            raise ConvertionExeption(quote, 'не является поддерживаемой валютой. Для того чтобы просмотреть список \
+            raise ConvertionExeption(f'{quote} не является поддерживаемой валютой. Для того чтобы просмотреть список \
 доступных валют используйте комманду /values')
 
         if base not in keys.keys():
-            raise ConvertionExeption(base, 'не является поддерживаемой валютой. Для того чтобы просмотреть список \
+            raise ConvertionExeption(f'{base} не является поддерживаемой валютой. Для того чтобы просмотреть список \
 доступных валют используйте комманду /values')
 
         try:
@@ -29,4 +29,4 @@ class CryptoConverter:
         r = requests.get(f'https://min-api.cryptocompare.com/data/price?fsym={keys[quote]}&tsyms={keys[base]}')
         total_base = json.loads(r.content)[keys[base]]
 
-        return total_base
+        return total_base * amount
