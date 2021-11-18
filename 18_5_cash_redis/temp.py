@@ -9,6 +9,5 @@ red = redis.Redis(
 
 cont = True
 
-print(red.get('andrei'))
-print(type(red.get('andrei')))
-print(red.get('andrei')[3])
+
+print(red.get())
