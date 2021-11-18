@@ -32,4 +32,12 @@ def values(message: telebot.types.Message):
     bot.reply_to(message, text)
 
 
+@bot.message_handler(content_types=['text', ])
+def convert(message: telebot.types.Message):
+    quote, base, amount = message.text.split(' ')
+    r = requests.get(f'https://min-api.cryptocompare.com/data/price?fsym={keys[quote]}&tsyms={keys[base]}')
+    text = json.loads(r.content)
+    bot.send_message(message.chat.id, "{0}: {1}".format(keys[base], text.get(keys[base])))
+
+
 bot.polling(none_stop=True)
