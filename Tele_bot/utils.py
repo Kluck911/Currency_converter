@@ -15,11 +15,11 @@ class CryptoConverter:
 
         if quote not in keys.keys():
             raise ConvertionExeption(quote, 'не является поддерживаемой валютой. Для того чтобы просмотреть список \
-        доступных валют введите комманду </values>')
+доступных валют используйте комманду /values')
 
         if base not in keys.keys():
             raise ConvertionExeption(base, 'не является поддерживаемой валютой. Для того чтобы просмотреть список \
-        доступных валют введите комманду </values>')
+доступных валют используйте комманду /values')
 
         try:
             amount = float(amount)
