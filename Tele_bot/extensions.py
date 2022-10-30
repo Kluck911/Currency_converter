@@ -4,12 +4,14 @@ from config import keys
 
 
 class ConvertionExeption(Exception):
+    '''ошибка конвертации'''
+
     pass
 
 
 class CryptoConverter:
     @staticmethod
-    def get_price(quote: str, base: str, amount: str):
+    def get_price(quote: str, base: str, amount: str) -> float:
         if quote == base:
             raise ConvertionExeption(f'Невозможно выполнить перевод одинаковых валют - {base}.')
 

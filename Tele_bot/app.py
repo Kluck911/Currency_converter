@@ -6,8 +6,8 @@ bot = telebot.TeleBot(TOKEN)
 
 
 @bot.message_handler(commands=['start', 'help'])
-def help(message: telebot.types.Message):
-    '''Вызов сообщения с описанием работы бота'''
+def help_(message: telebot.types.Message) -> None:
+    """Вызов сообщения с описанием работы бота"""
 
     text = 'Введите тип конвертируемой валюты в следующем виде:\n<имя валюты> <в какую валюту ' \
            'перевести> <количество переводимой валюты>.\nВсе значения вводите через пробел.\n' \
@@ -16,7 +16,9 @@ def help(message: telebot.types.Message):
 
 
 @bot.message_handler(commands=['values'])
-def values(message: telebot.types.Message):
+def values(message: telebot.types.Message) -> None:
+    '''Вызов сообщения со списком валют'''
+
     text = 'Доступные валюты:'
     for key in keys.keys():
         text = '\n'.join((text, key))
@@ -24,7 +26,9 @@ def values(message: telebot.types.Message):
 
 
 @bot.message_handler(content_types=['text', ])
-def get_price(message: telebot.types.Message):
+def get_price(message: telebot.types.Message) -> None:
+    '''Конвертация валюты'''
+
     try:
         values_ = message.text.split(' ')
 
