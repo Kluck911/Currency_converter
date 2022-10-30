@@ -5,6 +5,8 @@ You can use RUR, EUR or USD.
 
 # How To Start
 
+- python version 3.10
+
 1. Create a BOT with BotFather: https://t.me/botfather
 2. Enter 'pip install -r requirements.txt' in command promt
 3. Use config file to change Api token
