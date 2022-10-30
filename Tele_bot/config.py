@@ -1,5 +1,4 @@
-TOKEN = '' #Please, enter your API-token
-
+TOKEN = ''  # Please, enter your API-token
 
 keys = {
     'рубль': 'RUR',
