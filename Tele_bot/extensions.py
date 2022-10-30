@@ -4,7 +4,7 @@ from config import keys
 
 
 class ConvertionExeption(Exception):
-    '''ошибка конвертации'''
+    """Возникает в случае неудачной конвертации валюты"""
 
     pass
 
@@ -12,16 +12,18 @@ class ConvertionExeption(Exception):
 class CryptoConverter:
     @staticmethod
     def get_price(quote: str, base: str, amount: str) -> float:
+        """Функция проверяет корректность введенных пользователем данных
+        и возвращает количество сконвертированной валюты"""
         if quote == base:
             raise ConvertionExeption(f'Невозможно выполнить перевод одинаковых валют - {base}.')
 
         if quote not in keys.keys():
             raise ConvertionExeption(f'{quote} не является поддерживаемой валютой. Для того чтобы просмотреть список \
-доступных валют используйте комманду /values')
+доступных валют используйте команду /values')
 
         if base not in keys.keys():
             raise ConvertionExeption(f'{base} не является поддерживаемой валютой. Для того чтобы просмотреть список \
-доступных валют используйте комманду /values')
+доступных валют используйте команду /values')
 
         try:
             amount = float(amount)

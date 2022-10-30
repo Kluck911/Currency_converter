@@ -17,7 +17,7 @@ def help_(message: telebot.types.Message) -> None:
 
 @bot.message_handler(commands=['values'])
 def values(message: telebot.types.Message) -> None:
-    '''Вызов сообщения со списком валют'''
+    '''Функция показывает сообщение со списком доступных валют'''
 
     text = 'Доступные валюты:'
     for key in keys.keys():
@@ -27,8 +27,8 @@ def values(message: telebot.types.Message) -> None:
 
 @bot.message_handler(content_types=['text', ])
 def get_price(message: telebot.types.Message) -> None:
-    '''Конвертация валюты'''
-
+    '''Функция получает запрос пользователя, и возвращает сообщение,
+     которое содержит введенные валюты и значение после конвертации'''
     try:
         values_ = message.text.split(' ')
 
